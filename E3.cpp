@@ -1,27 +1,21 @@
-#include <iostream>
-#include <cmath>
+#include<iostream>
 using namespace std;
-int ucln(int a, int b)
-{
-   if(a==0 || b==0)
-   {
-       return a+b;
-   }
-   int min=a<b?a:b;
-   for(int i=min;i>=1;i--)
-   {
-       if(a%i == 0 && b%i==0)
-       {
-           return i;
-       }
-   }
-   return 1;
-}
 int main()
 {
-   int m,n;
-   cin>>m;
-   cin>>n;
-   cout<<ucln(m,n);
-   return 0;
+    int n, dem=0;
+    cin>>n;
+    int a[n];
+    for(int i=0; i<n; i++)
+    {
+        cin>>a[i];
+    }
+    for(int i=0; i<n; i++)
+    {
+        if(a[i-1]+a[i]+a[i+1]==0)
+        {
+            dem++;
+        }
+    }
+    cout<<dem;
+    return 0;
 }

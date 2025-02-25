@@ -1,13 +1,24 @@
-#include <iostream>
-#include <string>
+#include<iostream>
 using namespace std;
 int main()
 {
-    string s;
-    getline(cin, s);
-    for(int i=s.size()-1; i>=0; i--)
+    int n, dem=0;
+    cin>>n;
+    int a[n];
+    for(int i=0; i<n; i++)
     {
-        cout<<s[i];
+        cin>>a[i];
     }
+    for(int i=0; i<n; i++)
+    {
+        for(int j=n-1; j>=i+1; j--)
+        {
+            if(a[j]==a[i])
+            {
+                dem+=1;
+            }
+        }
+    }
+    cout<<dem;
     return 0;
 }

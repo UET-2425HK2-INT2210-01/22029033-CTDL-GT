@@ -1,26 +1,35 @@
-#include<iostream>
-#include<iomanip>
+#include <iostream>
+#include <stack>
 using namespace std;
+
 int main()
 {
-    double a[5];
-    for(int i=0; i<5; i++)
+    stack<int> s;
+    int n, x;
+    cin >> n;
+    string op;
+    while (n--)
     {
-        cin>>a[i];
-    }
-    double max=a[0];
-    double min=a[0];
-    for(int i=0; i<5; i++)
-    {
-        if(a[i]<min)
+        cin >> op;
+        if (op == "push")
         {
-            min=a[i];
+            cin >> x, s.push(x);
         }
-        if(a[i]>max)
+        else if (op == "pop" && !s.empty())
         {
-            max=a[i];
+            s.pop();
         }
     }
-    cout<<setprecision(2)<<max+min;
+    stack<int> temp;
+    while (!s.empty())
+    {
+        temp.push(s.top());
+        s.pop();
+    }
+    while (!temp.empty())
+    {
+        cout << temp.top() << " ";
+        temp.pop();
+    }
     return 0;
 }

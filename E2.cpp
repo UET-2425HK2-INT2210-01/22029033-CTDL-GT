@@ -1,62 +1,117 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Point {
-    public:
-        double x,y;
 
-        void import(){
-            cin>>x>>y;
-        }
-        void Print(){
-            cout<<x<<" "<<y<<endl;
+class Node
+{
+    public:
+        int data;
+        Node* next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = nullptr;
         }
 };
 
-class Line {
+class LinkedList
+{
+    private:
+        Node* head;
     public:
-
-        // y = ax + b
-        double a,b;
-        Line (Point P1, Point P2){
-             a=(P1.y-P2.y)/(P1.x-P2.x);
-             b=P1.y-a*P1.x;
+        LinkedList()
+        {
+            head = nullptr;
         }
-        void Print(){
-            cout<<"y="<<a<<"x+"<<b<<endl;
-        }
-};
 
- void findIntersectionOfLines(Line L1,Line L2){
-     if(L1.a==L2.a&&L1.b==L2.b) {
-         cout<<"Many"<<endl;
-     }
-     else if(L1.a==L2.a&&L1.b!=L2.b){
-         cout<<"No"<<endl;
-     }
-    else {
-        double xi,yi;
-        xi=(L2.b-L1.b)/(L1.a-L2.a);
-        yi=xi*L1.a+L1.b;
-        cout<<xi<<" "<<yi<<endl;
+    void insert(int p, int x)
+    {
+        Node* new_node = new Node(x);
+        if (p == 0)
+        {
+            new_node->next = head;
+            head = new_node;
+            return;
+        }
+        Node* current = head;
+        for (int i = 0; i < p - 1; i++)
+        {
+            if (current == nullptr)
+            {
+                break;
+            }
+            current = current->next;
+        }
+
+        if (current != nullptr)
+        {
+            new_node->next = current->next;
+            current->next = new_node;
+        }
     }
- }
+
+    void delete_node(int p)
+    {
+        if (head == nullptr)
+        {
+            return;
+        }
+        if (p == 0)
+        {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        Node* current = head;
+        for (int i = 0; i < p - 1; i++)
+        {
+            if (current == nullptr)
+            {
+                return;
+            }
+            current = current->next;
+        }
+        if (current != nullptr && current->next != nullptr)
+        {
+            Node* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        }
+    }
+    void print_list()
+    {
+        Node* current = head;
+        while (current != nullptr)
+        {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
 
 int main()
 {
-    Point A, B, C, D;
-    A.import();
-    B.import();
-    C.import();
-    D.import();
-
-
-    Line AB (A, B);
-    Line CD (C, D);
-    AB.Print();
-    CD.Print();
-
-
-    findIntersectionOfLines (AB, CD);
-
+    LinkedList linked_list;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        string operation;
+        cin >> operation;
+        if (operation == "insert")
+        {
+            int p, x;
+            cin >> p >> x;
+            linked_list.insert(p, x);
+        }
+        else if (operation == "delete")
+        {
+            int p;
+            cin >> p;
+            linked_list.delete_node(p);
+        }
+    }
+    linked_list.print_list();
     return 0;
 }
