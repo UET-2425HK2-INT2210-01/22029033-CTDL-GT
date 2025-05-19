@@ -1,0 +1,13 @@
+/^...\....\....\....$/
+
+Định dạng "abc.def.ghi.jkx" bao gồm:
+
+Ba ký tự bất kỳ (a, b, c) -> ...
+Một dấu chấm nguyên văn -> \.
+Ba ký tự bất kỳ (d, e, f) -> ...
+Một dấu chấm nguyên văn -> \.
+Ba ký tự bất kỳ (g, h, i) -> ...
+Một dấu chấm nguyên văn -> \.
+Ba ký tự bất kỳ (j, k, x) -> ...
+^: Khớp với điểm bắt đầu của chuỗi.
+$: Khớp với điểm kết thúc của chuỗi.
